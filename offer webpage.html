@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gift Claim</title>
+<style>
+/* Base Reset and Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f3e3;
+  background-image: radial-gradient(#e5dec3 1px, transparent 1px);
+  background-size: 24px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-x: hidden; /* Prevents horizontal scrollbars from drifting paper */
+  position: relative;
+}
+/* Main Container */
+.card-container {
+  background-color: #fffdf6;
+  width: 100%;
+  max-width: 800px;
+  padding: 60px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 10; /* Keeps card above the background falling paper */
+}
+/* Gold Banner */
+.banner-container {
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+.gold-banner {
+  background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #aa7c11 100%);
+  color: #4a0d0d;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 12px 60px;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+  border: 2px solid #b8860b;
+}
+/* Gift Section */
+.gift-stage {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 40px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Glowing Background Light (Animated Pulse) */
+.glow-effect {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,223,118,0.7) 0%, rgba(255,253,246,0) 70%);
+  z-index: 1;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(0.85); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 0.9; }
+}
+/* Pure CSS Gift Box Wrapper (Animated Shake Like a GIF) */
+.gift-animation-wrap {
+  position: relative;
+  z-index: 2;
+  animation: giftShake 1.5s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+@keyframes giftShake {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  20% { transform: rotate(-8deg) scale(1.05); }
+  30% { transform: rotate(6deg) scale(1.05); }
+  40% { transform: rotate(-6deg) scale(1.05); }
+  50% { transform: rotate(4deg) scale(1.05); }
+  60% { transform: rotate(0deg) scale(1); }
+}
+.gift-box {
+  position: relative;
+  width: 160px;
+  height: 140px;
+  background: linear-gradient(135deg, #cc1111 0%, #990000 100%);
+  border-radius: 4px;
+  box-shadow: 0 15px 30px rgba(153, 0, 0, 0.3);
+}
+/* Gift Lid */
+.gift-box::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  width: 180px;
+  height: 30px;
+  background: linear-gradient(135deg, #e61a1a 0%, #b30000 100%);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+/* Vertical Ribbon */
+.ribbon-v {
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 15px);
+  width: 30px;
+  height: 160px;
+  background: linear-gradient(90deg, #d4af37 0%, #fff3a8 50%, #aa7c11 100%);
+  z-index: 3;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+/* Gift Bow */
+.bow {
+  position: absolute;
+  top: -45px;
+  left: calc(50% - 30px);
+  width: 60px;
+  height: 30px;
+  z-index: 4;
+}
+.bow::before, .bow::after {
+  content: '';
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border: 8px solid #d4af37;
+  border-radius: 50% 50% 0 50%;
+  transform: rotate(-45deg);
+  background: transparent;
+}
+.bow::after {
+  left: auto;
+  right: 0;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+}
+/* Hanging Gift Tag (Animated Sway) */
+.gift-tag {
+  position: absolute;
+  top: 25px;
+  right: 15px;
+  width: 45px;
+  height: 65px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  z-index: 5;
+  padding: 8px 4px;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform-origin: top center;
+  animation: tagSway 3s infinite ease-in-out;
+}
+@keyframes tagSway {
+  0%, 100% { transform: rotate(10deg); }
+  50% { transform: rotate(25deg); }
+}
+.gift-tag::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  width: 6px;
+  height: 6px;
+  background: #fffdf6;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+}
+.tag-text {
+  font-size: 10px;
+  color: #cc1111;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* ===================================================
+   NEW: FALLING PARTY PAPER (CONFETTI) ANIMATION SYSTEM 
+   =================================================== */
+.falling-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allows clicking items underneath */
+  z-index: 1;
+}
+.paper {
+  position: absolute;
+  top: -20px;
+  width: 12px;
+  height: 24px;
+  opacity: 0.85;
+  animation: fallDown 5s infinite linear;
+}
+/* Global Falling & Twisting Animation Loop */
+@keyframes fallDown {
+  0% {
+    top: -5%;
+    transform: translateX(0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  50% {
+    transform: translateX(80px) rotateX(180deg) rotateY(360deg) rotateZ(180deg);
+  }
+  100% {
+    top: 105%;
+    transform: translateX(-20px) rotateX(360deg) rotateY(720deg) rotateZ(360deg);
+  }
+}
+
+/* Randomized styles for 20 unique paper fragments */
+.p1  { left: 5%;   background: #e74c3c; width: 14px; height: 20px; animation-duration: 4.2s; animation-delay: 0.1s; }
+.p2  { left: 10%;  background: #3498db; width: 10px; height: 26px; animation-duration: 5.8s; animation-delay: 1.5s; border-radius: 50%; }
+.p3  { left: 18%;  background: #f1c40f; width: 12px; height: 18px; animation-duration: 3.9s; animation-delay: 0.7s; }
+.p4  { left: 23%;  background: #2ecc71; width: 16px; height: 16px; animation-duration: 6.2s; animation-delay: 2.3s; }
+.p5  { left: 29%;  background: #9b59b6; width: 8px;  height: 28px; animation-duration: 4.7s; animation-delay: 0.0s; }
+.p6  { left: 36%;  background: #e67e22; width: 12px; height: 22px; animation-duration: 5.1s; animation-delay: 3.1s; }
+.p7  { left: 42%;  background: #1abc9c; width: 15px; height: 15px; animation-duration: 4.0s; animation-delay: 1.1s; border-radius: 50%; }
+.p8  { left: 48%;  background: #e74c3c; width: 11px; height: 25px; animation-duration: 5.5s; animation-delay: 0.4s; }
+.p9  { left: 54%;  background: #f1c40f; width: 14px; height: 18px; animation-duration: 3.6s; animation-delay: 2.8s; }
+.p10 { left: 60%;  background: #3498db; width: 9px;  height: 24px; animation-duration: 6.0s; animation-delay: 0.9s; }
+.p11 { left: 65%;  background: #2ecc71; width: 13px; height: 21px; animation-duration: 4.5s; animation-delay: 1.8s; }
+.p12 { left: 71%;  background: #9b59b6; width: 16px; height: 16px; animation-duration: 5.3s; animation-delay: 4.0s; border-radius: 50%; }
+.p13 { left: 76%;  background: #e67e22; width: 10px; height: 27px; animation-duration: 3.8s; animation-delay: 0.2s; }
+.p14 { left: 82%;  background: #1abc9c; width: 12px; height: 20px; animation-duration: 5.7s; animation-delay: 2.5s; }
+.p15 { left: 87%;  background: #e74c3c; width: 15px; height: 15px; animation-duration: 4.1s; animation-delay: 0.8s; }
+.p16 { left: 93%;  background: #f1c40f; width: 8px;  height: 22px; animation-duration: 4.9s; animation-delay: 1.3s; }
+.p17 { left: 3%;   background: #2ecc71; width: 14px; height: 25px; animation-duration: 5.2s; animation-delay: 3.5s; }
+.p18 { left: 32%;  background: #3498db; width: 12px; height: 18px; animation-duration: 4.3s; animation-delay: 2.0s; }
+.p19 { left: 57%;  background: #e67e22; width: 16px; height: 16px; animation-duration: 5.0s; animation-delay: 0.5s; border-radius: 50%; }
+.p20 { left: 96%;  background: #9b59b6; width: 10px; height: 24px; animation-duration: 3.7s; animation-delay: 1.9s; }
+
+/* Link Wrap Reset */
+.button-link {
+  text-decoration: none;
+  display: inline-block;
+}
+/* 3D Claim Button */
+.claim-btn {
+  display: inline-block;
+  background: linear-gradient(to bottom, #00a2ff 0%, #0066cc 100%);
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 16px 60px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #004488, 0 15px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+  text-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  letter-spacing: 1px;
+  outline: none;
+}
+.claim-btn:hover {
+  background: linear-gradient(to bottom, #11b0ff 0%, #0077ee 100%);
+}
+.button-link:active .claim-btn {
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 #004488, 0 8px 10px rgba(0, 0, 0, 0.2);
+}
+</style>
+</head>
+<body>
+
+<!-- New Layer: Fullscreen falling party papers -->
+<div class="falling-container">
+  <div class="paper p1"></div>
+  <div class="paper p2"></div>
+  <div class="paper p3"></div>
+  <div class="paper p4"></div>
+  <div class="paper p5"></div>
+  <div class="paper p6"></div>
+  <div class="paper p7"></div>
+  <div class="paper p8"></div>
+  <div class="paper p9"></div>
+  <div class="paper p10"></div>
+  <div class="paper p11"></div>
+  <div class="paper p12"></div>
+  <div class="paper p13"></div>
+  <div class="paper p14"></div>
+  <div class="paper p15"></div>
+  <div class="paper p16"></div>
+  <div class="paper p17"></div>
+  <div class="paper p18"></div>
+  <div class="paper p19"></div>
+  <div class="paper p20"></div>
+</div>
+
+<div class="card-container">
+  <!-- Header Gold Banner -->
+  <div class="banner-container">
+    <div class="gold-banner">You Have Received A Gift!</div>
+  </div>
+
+  <!-- Gift Graphic Stage -->
+  <div class="gift-stage">
+    <div class="glow-effect"></div>
+    <div class="gift-animation-wrap">
+      <div class="gift-box">
+        <div class="bow"></div>
+        <div class="ribbon-v"></div>
+        <div class="gift-tag">
+          <span class="tag-text">Special</span>
+          <span class="tag-text">Gift</span>
+
+  <!-- Action Link Button -->
+  <div>
+    <a href="https://www.google.com/" class="button-link">
+      <button class="claim-btn">Click Here To Claim</button>
+    </a>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
