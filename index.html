@@ -192,9 +192,7 @@ body {
   line-height: 1.1;
 }
 
-/* ===================================================
-   NEW: FALLING PARTY PAPER (CONFETTI) ANIMATION SYSTEM 
-   =================================================== */
+/* Falling Confetti Layout Wrapper */
 .falling-container {
   position: fixed;
   top: 0;
@@ -249,41 +247,37 @@ body {
 .p19 { left: 57%;  background: #e67e22; width: 16px; height: 16px; animation-duration: 5.0s; animation-delay: 0.5s; border-radius: 50%; }
 .p20 { left: 96%;  background: #9b59b6; width: 10px; height: 24px; animation-duration: 3.7s; animation-delay: 1.9s; }
 
-/* Link Wrap Reset */
+/* Link Wrap Reset with Automation Fix Override */
 .button-link {
   text-decoration: none;
   display: inline-block;
+  position: relative; /* Enables z-index stacking layers */
+  z-index: 9999;       /* Forces link structural visibility above all background layers */
 }
-/* 3D Claim Button */
+
+/* 3D Claim Button Styling */
 .claim-btn {
   display: inline-block;
   background: linear-gradient(to bottom, #00a2ff 0%, #0066cc 100%);
   color: #ffffff;
   font-size: 24px;
   font-weight: bold;
-  text-transform: uppercase;
-  padding: 16px 60px;
+  padding: 15px 40px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 8px 0 #004488, 0 15px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.1s ease;
-  text-shadow: 0 2px 3px rgba(0,0,0,0.3);
-  letter-spacing: 1px;
-  outline: none;
+  box-shadow: 0 4px 0 #004488;
+  transition: transform 0.1s;
 }
-.claim-btn:hover {
-  background: linear-gradient(to bottom, #11b0ff 0%, #0077ee 100%);
-}
-.button-link:active .claim-btn {
+.claim-btn:active {
   transform: translateY(4px);
-  box-shadow: 0 4px 0 #004488, 0 8px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 </style>
 </head>
 <body>
 
-<!-- New Layer: Fullscreen falling party papers -->
+<!-- Falling Paper Layers -->
 <div class="falling-container">
   <div class="paper p1"></div>
   <div class="paper p2"></div>
@@ -308,12 +302,10 @@ body {
 </div>
 
 <div class="card-container">
-  <!-- Header Gold Banner -->
   <div class="banner-container">
-    <div class="gold-banner">You Have Received A Gift!</div>
+    <div class="gold-banner">Special Gift</div>
   </div>
 
-  <!-- Gift Graphic Stage -->
   <div class="gift-stage">
     <div class="glow-effect"></div>
     <div class="gift-animation-wrap">
@@ -323,16 +315,18 @@ body {
         <div class="gift-tag">
           <span class="tag-text">Special</span>
           <span class="tag-text">Gift</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Action Link Button -->
+  <!-- Main Trigger Link Container -->
   <div>
     <a href="https://trksy.org/aff_c?offer_id=666&aff_id=178055" class="button-link">
       <button class="claim-btn">Click Here To Claim</button>
     </a>
-    </div>
-      </div>
-    </div>
   </div>
 </div>
+
 </body>
 </html>
